@@ -9,7 +9,7 @@ const EndpointSchema = new mongoose.Schema({
 
 export const EndpointModel = mongoose.model('Endpoint', EndpointSchema);
 
-export const getEndpoints = () => EndpointModel.find();
+export const getEndpoints = (): any => EndpointModel.find();
 export const getEndpointById = (id: string) => EndpointModel.findById(id);
 export const createEndpoint = (values: Record<string, any>) => new EndpointModel(values).save();
 export const deleteEndpointById = (id: string) => EndpointModel.findOneAndDelete({ _id: id });
