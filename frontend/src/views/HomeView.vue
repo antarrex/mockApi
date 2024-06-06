@@ -35,7 +35,7 @@ onMounted(() => {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="endpoint in endpoints" :key="endpoint.id">
+      <tr v-for="endpoint in endpoints" :key="endpoint._id">
         <td>{{ endpoint.url }}</td>
         <td>{{ endpoint.method }}</td>
         <td>{{ endpoint.statusCode }}</td>

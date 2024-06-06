@@ -1,12 +1,20 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, type Ref } from 'vue'
 import axios from '../api'
 import { useRoute } from 'vue-router'
 import JsonEditor from 'vue3-ts-jsoneditor'
 import router from '../router'
 
 const route = useRoute()
-const endpoint = ref(null)
+
+type Endpoint = {
+  _id: string
+  url: string
+  method: string
+  statusCode: number
+  mockJson: string
+}
+const endpoint: Ref<Endpoint | null> = ref(null)
 onMounted(async () => {
   const { data } = await axios.get(`/endpoints/${route.params.id}`)
   data.mockJson = JSON.parse(data.mockJson)
@@ -15,10 +23,10 @@ onMounted(async () => {
 
 async function submit() {
   await axios.patch(`/endpoints/${route.params.id}`, {
-    url: endpoint.value.url,
-    method: endpoint.value.method,
-    statusCode: endpoint.value.statusCode,
-    mockJson: endpoint.value.mockJson
+    url: endpoint.value?.url,
+    method: endpoint.value?.method,
+    statusCode: endpoint.value?.statusCode,
+    mockJson: endpoint.value?.mockJson
   })
 
   router.push('/')

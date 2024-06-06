@@ -1,0 +1,29 @@
+version: "3"
+services:
+  vue-app:
+    image: vue-app
+    ports: 
+      - "5173:5173"
+    networks:
+      - mock-api-app  
+  api-server:
+    image: api-server
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    networks:
+      - mock-api-app  
+  mongo:
+    image: mongo:3.6.19-xenial
+    ports:
+      - "27017:27017"
+    networks:
+      - mock-api-app
+
+networks:
+  mock-api-app:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
