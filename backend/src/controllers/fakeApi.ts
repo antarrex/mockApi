@@ -28,7 +28,7 @@ export const fakeApi = async (req: express.Request, res: express.Response) => {
       const data = JSON.parse(findEndpoint.mockJson);
       let resData;
       if (id && Array.isArray(data)) {
-        resData = data.find(item => item._id === id);
+        resData = data.find(item => item.id === id);
         if (!resData) {
           res.status(404).json({ code: 404, message: 'Not found' });
           return res.end();
