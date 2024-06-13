@@ -39,6 +39,8 @@ export const fakeApi = async (req: express.Request, res: express.Response) => {
         res.setHeader('Total-Count', resData.length);
         resData.splice(0, Number(offset));
         resData.splice(Number(limit));
+      } else if (typeof data === 'object') {
+        resData = data;
       }
       return res.status(findEndpoint.statusCode).json(resData);
     } else {
